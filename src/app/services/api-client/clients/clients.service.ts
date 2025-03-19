@@ -29,7 +29,7 @@ export class ClientsService implements IClientService {
     return this.http.get<ListClientResponse[]>(`${this.basePath}clients`); 
    }
 
-  findByID(id: number): Observable<DetailClientResponse> {
-    return this.http.get<DetailClientResponse>(`${this.basePath}clients${id}`); 
+  findById(id: number): Observable<DetailClientResponse> {
+    return this.http.get<DetailClientResponse>(`${this.basePath}clients/${id}`); 
   }
 }
