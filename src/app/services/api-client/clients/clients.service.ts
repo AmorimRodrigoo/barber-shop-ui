@@ -11,7 +11,7 @@ export class ClientsService implements IClientService {
 
   constructor(private http: HttpClient) { }
 
-  private readonly basePath = enviroment.apiUrl
+  private readonly basePath = environment.apiUrl
 
   save(request: SaveClientRequest): Observable<SaveClientResponse> {
     return this.http.post<SaveClientResponse>(`${this.basePath}clients`, request);
