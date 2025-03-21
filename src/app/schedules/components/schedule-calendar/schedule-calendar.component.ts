@@ -17,6 +17,7 @@ import { SERVICES_TOKEN } from '../../../services/service.token';
  import { MatFormFieldModule } from '@angular/material/form-field';
  import { MatSelectModule } from '@angular/material/select';
  import { MatTimepickerModule } from '@angular/material/timepicker';
+ import { MatNativeDateModule } from '@angular/material/core';
  import { YesNoDialogComponent } from '../../../commons/components/yes-no-dialog/yes-no-dialog.component';
  import { Subscription } from 'rxjs';
 
@@ -36,6 +37,7 @@ import { SERVICES_TOKEN } from '../../../services/service.token';
      MatInputModule,
      MatFormFieldModule,
      MatSelectModule,
+     MatNativeDateModule
   ],
   templateUrl: './schedule-calendar.component.html',
   styleUrl: './schedule-calendar.component.scss',
@@ -138,7 +140,12 @@ export class ScheduleCalendarComponent implements OnInit, AfterViewInit, OnChang
     })
   }
 
-  onTimeChange(time: Date) {
+  onTimeChange(time: Date | null) {
+    if (!time) {
+      this.newSchedule.endAt = undefined; // Reseta o valor se o tempo for inválido
+      return;
+    }
+
     const endAt = new Date(time)
     endAt.setHours(time.getHours() + 1)
     this.newSchedule.endAt = endAt
